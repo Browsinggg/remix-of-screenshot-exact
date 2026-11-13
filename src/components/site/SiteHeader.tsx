@@ -32,12 +32,12 @@ export function SiteHeader() {
           <Monogram size="sm" className="text-3xl" />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main">
           {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-full px-3 py-2 text-[0.72rem] uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:text-primary"
+              className="whitespace-nowrap rounded-full px-2.5 py-2 text-[0.68rem] uppercase tracking-[0.16em] text-foreground/80 transition-colors hover:text-primary"
               activeProps={{ className: "text-primary" }}
               activeOptions={{ exact: true }}
             >

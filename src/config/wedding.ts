@@ -1,8 +1,8 @@
 /**
  * ─────────────────────────────────────────────────────────────
  *  #SaRang — CENTRAL WEDDING CONTENT
- *  Edit this one file to update names, dates, events, hotels,
- *  contacts, links and photo slots across the whole website.
+ *  Edit this one file to update names, dates, events, contacts,
+ *  links, the invitation video and photo slots across the website.
  *
  *  • Text in "[ ... ]" square brackets is a PLACEHOLDER that
  *    still needs real information.
@@ -28,14 +28,29 @@ export const wedding = {
   welcomeShort:
     "With joyous hearts, the Goel and Gupta families welcome you to celebrate the union of Saniya and Raghav.",
   welcomeLong:
-    "Two families, one celebration. We would be honoured to have you with us in Roorkee as Saniya and Raghav begin their journey together. This little website holds everything you need — the functions, your stay, and a place to leave your blessings.",
+    "Two families, one celebration. We would be honoured to have you with us in Roorkee as Saniya and Raghav begin their journey together. This little website holds everything you need — the functions, your RSVP, and a place to leave your blessings.",
 
   /** RSVP deadline shown on the RSVP page. */
   rsvpDeadline: "[RSVP deadline to be announced]",
 
-  /** Digital invitation artwork. Paste an image URL here once uploaded. */
-  invitationImageUrl: "",
+  /** Closing note shown in the footer of every page, signed by the couple. */
+  closingMessage:
+    "Thank you for being part of our story. Your love and blessings mean the world to us — we can't wait to celebrate with you.",
 } as const;
+
+/* ───────────────────────── VIDEO INVITATION ─────────────────────────
+ * videoUrl: paste a direct video link (ending in .mp4 / .webm / .mov) OR a
+ *           YouTube / Vimeo link. Leave "" to show the "coming soon" frame.
+ * posterUrl: optional cover image shown before the guest taps play.
+ * aspectRatio: only used for YouTube / Vimeo links and the placeholder —
+ *              an uploaded video file always keeps its own original shape.
+ */
+
+export const invitation = {
+  videoUrl: "",
+  posterUrl: "",
+  aspectRatio: "9 / 16",
+};
 
 /* ───────────────────────── EVENTS ───────────────────────── */
 
@@ -118,48 +133,13 @@ export const events: WeddingEvent[] = [
   },
 ];
 
-/* ───────────────────────── HOTELS ─────────────────────────
- * Replace each "[ ... ]" with the real details once confirmed.
- * Leave mapsUrl "" until known — a Maps search on the name is used
- * automatically once the name is filled in.
- */
-
-export type Hotel = {
-  id: string;
-  /** Short label used in dropdowns until the real name is known */
-  label: string;
-  name: string;
-  address: string;
-  mapsUrl: string;
-  contact: string;
-  checkIn: string;
-  checkOut: string;
-  transport: string;
-  notes: string;
-  /** Set to true once real details are filled in */
-  confirmed: boolean;
-};
-
-export const hotels: Hotel[] = [1, 2, 3].map((n) => ({
-  id: `hotel-${n}`,
-  label: `Hotel ${n}`,
-  name: `Hotel ${n} – Details Coming Soon`,
-  address: "[Hotel address to be added]",
-  mapsUrl: "",
-  contact: "[Contact number to be added]",
-  checkIn: "[Check-in time to be added]",
-  checkOut: "[Check-out time to be added]",
-  transport: "[Transport / pickup details to be added]",
-  notes: "[Any additional instructions to be added]",
-  confirmed: false,
-}));
-
 /* ───────────────────────── CONTACTS ───────────────────────── */
 
+/** Shown on the Contact page in exactly this order. */
 export const contacts = [
-  { name: "Poneet Gupta", phone: "9820046549" },
-  { name: "Vikas Gupta (Vicky)", phone: "9811407991" },
   { name: "Shourya Goel", phone: "9557310364" },
+  { name: "Vikas Gupta (Vicky)", phone: "9811407991" },
+  { name: "Poneet Gupta", phone: "9820046549" },
 ];
 
 /* ───────────────────────── FAMILY ───────────────────────── */
@@ -214,8 +194,8 @@ export const couple = {
   },
   story: {
     text: "[Saniya & Raghav's story — how they met, to be added.]",
-    preWeddingPhotos: slots("Upload Pre-wedding Photograph", 3),
-    couplePhotos: slots("Upload Couple Photograph", 4),
+    /** Six frames in an editorial layout — the first is shown largest. */
+    preWeddingPhotos: slots("Upload Pre-wedding Photograph", 6),
     /** YouTube / Vimeo embed URL, e.g. https://www.youtube.com/embed/VIDEO_ID */
     videoEmbedUrl: "",
   },

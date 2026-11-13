@@ -11,10 +11,9 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { events, wedding } from "@/config/wedding";
 import { useSubmissionId } from "@/hooks/use-submission-id";
-import { DIETS, rsvpSchema, totalAttendees, type RsvpInput, type SubmitResult } from "@/lib/forms";
+import { rsvpSchema, totalAttendees, type RsvpInput, type SubmitResult } from "@/lib/forms";
 import { submitRsvp } from "@/lib/sheets.functions";
 import { cn } from "@/lib/utils";
 
@@ -62,8 +61,6 @@ function RsvpPage() {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [functions, setFunctions] = useState<FunctionId[]>(events.map((e) => e.id));
-  const [diet, setDiet] = useState<(typeof DIETS)[number]>("Vegetarian");
-  const [dietNotes, setDietNotes] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [errors, setErrors] = useState<FieldErrors<RsvpInput>>({});
   const [pending, setPending] = useState(false);
@@ -82,7 +79,7 @@ function RsvpPage() {
   const onSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
     if (pending) return;
-    const values = { submissionId, guestName, familyName, contact, adults, children, attending, functions, diet, dietNotes, confirm };
+    const values = { submissionId, guestName, familyName, contact, adults, children, attending, functions, confirm };
     const parsed = rsvpSchema.safeParse(values);
     if (!parsed.success) {
       setErrors(issuesToErrors<RsvpInput>(parsed.error.issues));
@@ -141,7 +138,7 @@ function RsvpPage() {
               Your RSVP has been received with love. We can't wait to celebrate with you.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3">
-              <Button asChild variant="rose" size="lg"><Link to="/stay">Share your stay details</Link></Button>
+              <Button asChild variant="rose" size="lg"><Link to="/memories">Leave a memory for the couple</Link></Button>
               <Button variant="link" onClick={startAnother}>Submit a response for another family</Button>
             </div>
           </div>
@@ -205,29 +202,6 @@ function RsvpPage() {
                   ))}
                   {errors.functions && <p className="text-xs text-destructive">{errors.functions}</p>}
                 </fieldset>
-
-                <fieldset className="space-y-3">
-                  <legend className="text-sm font-medium">Dietary preference</legend>
-                  <div className="grid grid-cols-3 gap-2">
-                    {DIETS.map((d) => (
-                      <button
-                        key={d}
-                        type="button"
-                        onClick={() => setDiet(d)}
-                        aria-pressed={diet === d}
-                        className={cn(
-                          "rounded-md border px-2 py-2.5 text-sm transition-colors",
-                          diet === d ? "border-botanical bg-botanical text-botanical-foreground" : "border-input bg-paper hover:border-botanical",
-                        )}
-                      >
-                        {d}
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
-                <Field id="dietNotes" label="Additional dietary requirements" optional error={errors.dietNotes}>
-                  <Textarea id="dietNotes" rows={3} value={dietNotes} onChange={(e) => setDietNotes(e.target.value)} placeholder="Allergies, no onion/garlic, etc." />
-                </Field>
               </>
             )}
 

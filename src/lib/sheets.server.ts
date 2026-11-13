@@ -9,7 +9,7 @@ import type { SubmitResult } from "./forms";
  *   APPS_SCRIPT_SECRET  – the same shared secret saved in the Apps Script
  */
 export async function postToAppsScript(
-  action: "rsvp" | "accommodation" | "check" | "memory",
+  action: "rsvp" | "memory",
   payload: Record<string, unknown>,
 ): Promise<SubmitResult> {
   const url = process.env["APPS_SCRIPT_URL"];

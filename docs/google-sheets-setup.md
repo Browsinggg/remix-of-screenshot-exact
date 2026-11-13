@@ -1,6 +1,6 @@
 # Connecting #SaRang to Google Sheets
 
-Every form on the website (RSVP, Accommodation, Check-in/out, Memories) saves into
+Both forms on the website (RSVP and Leave a Memory) save into
 **one private Google Spreadsheet** through a small Google Apps Script. Until these steps
 are done, the forms politely tell guests that submissions open soon — nothing is lost
 or faked.
@@ -17,9 +17,8 @@ or faked.
 ## 3. Create the tabs automatically
 1. In the Apps Script toolbar choose the function **setupSheets** and click **▶ Run**.
 2. Approve the permissions Google asks for (it is your own script).
-3. Back in the spreadsheet you will now see 6 tabs with headings:
-   RSVP Responses · Function Attendance · Dietary Preferences · Accommodation ·
-   Actual Check-in/Out · Memories with Couple.
+3. Back in the spreadsheet you will now see 3 tabs with headings:
+   RSVP Responses · Function Attendance · Memories with Couple.
 
 ## 4. Choose a shared secret
 1. Make up a long random password (e.g. 30+ letters and numbers). Keep it private.
@@ -43,11 +42,7 @@ These are stored securely on the server and are never visible on the website.
 ## 7. Test each form
 | Form | Where | Check in the spreadsheet |
 |---|---|---|
-| RSVP | /rsvp | New row in **RSVP Responses**, 3 rows in **Function Attendance**, 1 row in **Dietary Preferences** |
-| Accommodation | /stay | New row in **Accommodation** |
-| Check-in | /stay → "I've Checked In" | Row with *Check-in* + IST time in **Actual Check-in/Out** |
-| Repeat check-in (same hotel & room) | /stay | Website shows "already checked in" — no new row |
-| Check-out | /stay → "I've Checked Out" | Row with *Check-out* |
+| RSVP | /rsvp | New row in **RSVP Responses**, 3 rows in **Function Attendance** |
 | Memory | /memories | New row in **Memories with Couple** |
 
 Delete your test rows afterwards.

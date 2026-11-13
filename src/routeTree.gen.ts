@@ -11,12 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaptureRouteImport } from './routes/capture'
+import { Route as CelebrationsRouteImport } from './routes/celebrations'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CoupleRouteImport } from './routes/couple'
-import { Route as EventsRouteImport } from './routes/events'
 import { Route as MemoriesRouteImport } from './routes/memories'
+import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as RsvpRouteImport } from './routes/rsvp'
-import { Route as StayRouteImport } from './routes/stay'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,19 +27,14 @@ const CaptureRoute = CaptureRouteImport.update({
   path: '/capture',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CelebrationsRoute = CelebrationsRouteImport.update({
+  id: '/celebrations',
+  path: '/celebrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoupleRoute = CoupleRouteImport.update({
-  id: '/couple',
-  path: '/couple',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemoriesRoute = MemoriesRouteImport.update({
@@ -48,90 +42,83 @@ const MemoriesRoute = MemoriesRouteImport.update({
   path: '/memories',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OurStoryRoute = OurStoryRouteImport.update({
+  id: '/our-story',
+  path: '/our-story',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RsvpRoute = RsvpRouteImport.update({
   id: '/rsvp',
   path: '/rsvp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StayRoute = StayRouteImport.update({
-  id: '/stay',
-  path: '/stay',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/capture': typeof CaptureRoute
+  '/celebrations': typeof CelebrationsRoute
   '/contact': typeof ContactRoute
-  '/couple': typeof CoupleRoute
-  '/events': typeof EventsRoute
   '/memories': typeof MemoriesRoute
+  '/our-story': typeof OurStoryRoute
   '/rsvp': typeof RsvpRoute
-  '/stay': typeof StayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/capture': typeof CaptureRoute
+  '/celebrations': typeof CelebrationsRoute
   '/contact': typeof ContactRoute
-  '/couple': typeof CoupleRoute
-  '/events': typeof EventsRoute
   '/memories': typeof MemoriesRoute
+  '/our-story': typeof OurStoryRoute
   '/rsvp': typeof RsvpRoute
-  '/stay': typeof StayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/capture': typeof CaptureRoute
+  '/celebrations': typeof CelebrationsRoute
   '/contact': typeof ContactRoute
-  '/couple': typeof CoupleRoute
-  '/events': typeof EventsRoute
   '/memories': typeof MemoriesRoute
+  '/our-story': typeof OurStoryRoute
   '/rsvp': typeof RsvpRoute
-  '/stay': typeof StayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/capture'
+    | '/celebrations'
     | '/contact'
-    | '/couple'
-    | '/events'
     | '/memories'
+    | '/our-story'
     | '/rsvp'
-    | '/stay'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/capture'
+    | '/celebrations'
     | '/contact'
-    | '/couple'
-    | '/events'
     | '/memories'
+    | '/our-story'
     | '/rsvp'
-    | '/stay'
   id:
     | '__root__'
     | '/'
     | '/capture'
+    | '/celebrations'
     | '/contact'
-    | '/couple'
-    | '/events'
     | '/memories'
+    | '/our-story'
     | '/rsvp'
-    | '/stay'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CaptureRoute: typeof CaptureRoute
+  CelebrationsRoute: typeof CelebrationsRoute
   ContactRoute: typeof ContactRoute
-  CoupleRoute: typeof CoupleRoute
-  EventsRoute: typeof EventsRoute
   MemoriesRoute: typeof MemoriesRoute
+  OurStoryRoute: typeof OurStoryRoute
   RsvpRoute: typeof RsvpRoute
-  StayRoute: typeof StayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,25 +137,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaptureRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/celebrations': {
+      id: '/celebrations'
+      path: '/celebrations'
+      fullPath: '/celebrations'
+      preLoaderRoute: typeof CelebrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/couple': {
-      id: '/couple'
-      path: '/couple'
-      fullPath: '/couple'
-      preLoaderRoute: typeof CoupleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/memories': {
@@ -178,18 +158,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/our-story': {
+      id: '/our-story'
+      path: '/our-story'
+      fullPath: '/our-story'
+      preLoaderRoute: typeof OurStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rsvp': {
       id: '/rsvp'
       path: '/rsvp'
       fullPath: '/rsvp'
       preLoaderRoute: typeof RsvpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stay': {
-      id: '/stay'
-      path: '/stay'
-      fullPath: '/stay'
-      preLoaderRoute: typeof StayRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -198,12 +178,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CaptureRoute: CaptureRoute,
+  CelebrationsRoute: CelebrationsRoute,
   ContactRoute: ContactRoute,
-  CoupleRoute: CoupleRoute,
-  EventsRoute: EventsRoute,
   MemoriesRoute: MemoriesRoute,
+  OurStoryRoute: OurStoryRoute,
   RsvpRoute: RsvpRoute,
-  StayRoute: StayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

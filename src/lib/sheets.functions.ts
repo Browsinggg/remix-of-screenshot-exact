@@ -1,8 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
 import {
-  accommodationSchema,
-  checkSchema,
   memorySchema,
   rsvpSchema,
   totalAttendees,
@@ -28,16 +26,6 @@ export const submitRsvp = createServerFn({ method: "POST" })
       functions: attending ? data.functions : [],
     });
   });
-
-export const submitAccommodation = createServerFn({ method: "POST" })
-  .validator((d: unknown) => accommodationSchema.parse(d))
-  .handler(async ({ data }): Promise<SubmitResult> => postToAppsScript("accommodation", data));
-
-export const submitCheck = createServerFn({ method: "POST" })
-  .validator((d: unknown) => checkSchema.parse(d))
-  .handler(async ({ data }): Promise<SubmitResult> =>
-    postToAppsScript("check", { ...data, room: data.room.toUpperCase() }),
-  );
 
 export const submitMemory = createServerFn({ method: "POST" })
   .validator((d: unknown) => memorySchema.parse(d))

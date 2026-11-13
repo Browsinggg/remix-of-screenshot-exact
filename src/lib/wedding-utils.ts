@@ -1,14 +1,8 @@
-import type { Hotel, WeddingEvent } from "@/config/wedding";
+import type { WeddingEvent } from "@/config/wedding";
 
 /** Google Maps search link from a venue name + area (no invented coordinates). */
 export function mapsSearchUrl(query: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-}
-
-export function hotelMapsUrl(hotel: Hotel): string | null {
-  if (hotel.mapsUrl) return hotel.mapsUrl;
-  if (!hotel.confirmed) return null;
-  return mapsSearchUrl(`${hotel.name}, ${hotel.address}`);
 }
 
 /** "2026-12-09T19:30:00+05:30" → "20261209T140000Z" (UTC, as Google Calendar expects) */
@@ -82,4 +76,31 @@ export function countdownParts(target: Date, now: Date): CountdownParts {
 /** True when a config value is still a "[ ... ]" placeholder */
 export function isPlaceholder(value: string): boolean {
   return value.trim().startsWith("[") || value.trim() === "";
+}
+
+export type VideoSource =
+  | { kind: "none" }
+  | { kind: "youtube"; id: string; embedUrl: string; thumbUrl: string }
+  | { kind: "vimeo"; id: string; embedUrl: string }
+  | { kind: "file"; src: string };
+
+/** Works out how to play the invitation video from whatever link was pasted. */
+export function parseVideoUrl(url: string): VideoSource {
+  const u = url.trim();
+  if (!u) return { kind: "none" };
+  const yt = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if (yt?.[1]) {
+    const id = yt[1];
+    return {
+      kind: "youtube",
+      id,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`,
+      thumbUrl: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    };
+  }
+  const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vm?.[1]) {
+    return { kind: "vimeo", id: vm[1], embedUrl: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
+  }
+  return { kind: "file", src: u };
 }

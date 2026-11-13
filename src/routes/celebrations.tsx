@@ -11,7 +11,7 @@ import { events } from "@/config/wedding";
 import { downloadItineraryPdf } from "@/lib/itinerary-pdf";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/events")({
+export const Route = createFileRoute("/celebrations")({
   head: () => ({
     meta: [
       { title: "Wedding Functions & Itinerary · #SaRang" },
