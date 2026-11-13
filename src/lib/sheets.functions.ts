@@ -17,7 +17,7 @@ import { postToAppsScript } from "./sheets.server";
  */
 
 export const submitRsvp = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => rsvpSchema.parse(d))
+  .validator((d: unknown) => rsvpSchema.parse(d))
   .handler(async ({ data }): Promise<SubmitResult> => {
     const attending = data.attending === "yes";
     return postToAppsScript("rsvp", {
@@ -30,15 +30,15 @@ export const submitRsvp = createServerFn({ method: "POST" })
   });
 
 export const submitAccommodation = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => accommodationSchema.parse(d))
+  .validator((d: unknown) => accommodationSchema.parse(d))
   .handler(async ({ data }): Promise<SubmitResult> => postToAppsScript("accommodation", data));
 
 export const submitCheck = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => checkSchema.parse(d))
+  .validator((d: unknown) => checkSchema.parse(d))
   .handler(async ({ data }): Promise<SubmitResult> =>
     postToAppsScript("check", { ...data, room: data.room.toUpperCase() }),
   );
 
 export const submitMemory = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => memorySchema.parse(d))
+  .validator((d: unknown) => memorySchema.parse(d))
   .handler(async ({ data }): Promise<SubmitResult> => postToAppsScript("memory", data));

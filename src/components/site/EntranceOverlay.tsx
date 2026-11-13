@@ -55,7 +55,7 @@ export function EntranceOverlay() {
           <Monogram size="xl" />
         </div>
         <h1 className="animate-rise mt-6 text-4xl text-foreground [animation-delay:300ms] sm:text-5xl">
-          {wedding.bride} <span className="font-script text-gold-deep">&amp;</span> {wedding.groom}
+          {wedding.bride} <span className="font-display italic text-gold-deep">&amp;</span> {wedding.groom}
         </h1>
         <Ornament className="animate-rise mt-6 [animation-delay:400ms]" />
         <p className="animate-rise mt-6 leading-relaxed text-muted-foreground [animation-delay:500ms]">

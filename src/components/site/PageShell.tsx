@@ -13,7 +13,7 @@ export function PageShell({ children, className }: { children: ReactNode; classN
         aria-hidden="true"
         width={1024}
         height={1024}
-        className="pointer-events-none absolute -left-10 -top-6 w-40 opacity-80 sm:w-56 md:w-64"
+        className="pointer-events-none absolute -left-10 top-14 w-32 opacity-80 sm:w-48 md:w-56"
       />
       <img
         src={floralCorner}
@@ -21,9 +21,9 @@ export function PageShell({ children, className }: { children: ReactNode; classN
         aria-hidden="true"
         width={1024}
         height={1024}
-        className="pointer-events-none absolute -right-10 -top-6 w-40 -scale-x-100 opacity-80 sm:w-56 md:w-64"
+        className="pointer-events-none absolute -right-10 top-14 w-32 -scale-x-100 opacity-80 sm:w-48 md:w-56"
       />
-      <div className="relative px-5 pb-20 pt-28 sm:px-8 sm:pt-32">{children}</div>
+      <div className="relative px-5 pb-20 pt-32 sm:px-8 sm:pt-36">{children}</div>
     </div>
   );
 }

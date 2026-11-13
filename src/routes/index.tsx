@@ -49,9 +49,9 @@ function Home() {
         <img src={goldMandala} alt="" aria-hidden="true" width={1024} height={1024}
           className="animate-slow-spin pointer-events-none absolute w-[40rem] max-w-none opacity-[0.1] sm:w-[56rem]" />
         <img src={floralCorner} alt="" aria-hidden="true" width={1024} height={1024}
-          className="pointer-events-none absolute -left-10 -top-4 w-44 sm:w-72 md:w-80" />
+          className="pointer-events-none absolute -left-10 top-14 w-36 sm:w-60 md:w-72" />
         <img src={floralCorner} alt="" aria-hidden="true" width={1024} height={1024}
-          className="pointer-events-none absolute -right-10 -top-4 w-44 -scale-x-100 sm:w-72 md:w-80" />
+          className="pointer-events-none absolute -right-10 top-14 w-36 -scale-x-100 sm:w-60 md:w-72" />
 
         <div className="relative mx-auto max-w-2xl text-center">
           <p className="eyebrow animate-rise">Together with the {wedding.families}</p>
@@ -60,7 +60,7 @@ function Home() {
           </div>
           <h1 className="animate-rise mt-6 text-5xl text-foreground [animation-delay:200ms] sm:text-7xl">
             {wedding.bride}
-            <span className="mx-3 font-script text-5xl text-gold-deep sm:text-6xl">&amp;</span>
+            <span className="mx-3 font-display italic text-gold-deep">&amp;</span>
             {wedding.groom}
           </h1>
           <p className="animate-rise mt-4 font-display text-xl italic text-muted-foreground [animation-delay:300ms] sm:text-2xl">

@@ -19,7 +19,7 @@ export async function postToAppsScript(
       ok: false,
       code: "not_configured",
       message:
-        "Submissions are not connected yet — the family is still setting this up. Please try again later or contact us below.",
+        "Submissions are not connected yet — the family is still setting this up. Please try again later, or reach the family via the Need Assistance page.",
     };
   }
 
