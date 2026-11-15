@@ -11,9 +11,9 @@ import { rolocam } from "@/config/wedding";
 export const Route = createFileRoute("/capture")({
   head: () => ({
     meta: [
-      { title: "Capture the Celebration · #SaRang" },
+      { title: "Capture the Moments · RoloCam · #SaRang" },
       { name: "description", content: "Share your candid photos and videos from Saniya & Raghav's wedding on our RoloCam album." },
-      { property: "og:title", content: "Capture the Celebration · #SaRang" },
+      { property: "og:title", content: "Capture the Moments · #SaRang" },
       { property: "og:description", content: "Scan, snap and share your candid moments with the couple." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,7 +35,7 @@ function CapturePage() {
       <SectionHeading
         as="h1"
         eyebrow="Disposable camera"
-        title="Capture the Celebration"
+        title="Capture the Moments"
         script="every candid moment counts"
         intro="Be our wedding photographer! Capture the laughter, the dancing and the little moments the cameras might miss."
       />
@@ -78,7 +78,7 @@ function CapturePage() {
           <div className="mt-8 space-y-3">
             {ready ? (
               <Button asChild variant="rose" size="xl" className="w-full">
-                <a href={rolocam.albumUrl} target="_blank" rel="noreferrer"><Camera /> Open RoloCam Album <ExternalLink /></a>
+                <a href={rolocam.albumUrl} target="_blank" rel="noopener noreferrer"><Camera /> Open RoloCam <ExternalLink /></a>
               </Button>
             ) : (
               <Button variant="rose" size="xl" className="w-full" disabled>
@@ -86,13 +86,13 @@ function CapturePage() {
               </Button>
             )}
             <p className="text-center text-xs text-muted-foreground">
-              The same QR code will also be displayed at all the wedding venues.
+              On your phone? Just tap the button to open the album. The same QR code will also be displayed at all the wedding venues.
             </p>
           </div>
           <div className="mt-10 border-t border-border pt-6 text-center">
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">For Saniya & Raghav</p>
             {rolocam.adminGalleryUrl ? (
-              <Button asChild variant="link"><a href={rolocam.adminGalleryUrl} target="_blank" rel="noreferrer">Open RoloCam admin gallery</a></Button>
+              <Button asChild variant="link"><a href={rolocam.adminGalleryUrl} target="_blank" rel="noopener noreferrer">Open RoloCam admin gallery</a></Button>
             ) : (
               <p className="mt-1 text-sm italic text-muted-foreground">Admin gallery link to be added</p>
             )}

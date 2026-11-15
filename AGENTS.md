@@ -30,8 +30,9 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
-- All wedding content (names, dates, events, hotels, contacts, links, photo slots) lives in `src/config/wedding.ts`; components read from it so non-technical edits touch one file.
+- All wedding content (names, dates, events, contacts, links, invitation video, photo slots) lives in `src/config/wedding.ts`; components read from it so non-technical edits touch one file.
 - Guest submissions go browser → `createServerFn` in `src/lib/sheets.functions.ts` → Google Apps Script (`docs/apps-script/Code.gs`); secrets `APPS_SCRIPT_URL`/`APPS_SCRIPT_SECRET` stay server-side and the browser never sees the sheet.
-- Official timestamps and check-in/out duplicate rules are enforced in Apps Script (IST, LockService), never from the guest's device.
+- Official timestamps and duplicate-submission checks are enforced in Apps Script (IST, LockService), never from the guest's device.
+- The invitation video player picks embed vs native `<video>` via `parseVideoUrl` in `src/lib/wedding-utils.ts`; native files are never forced into a fixed aspect box so the original ratio is kept.
 - Forms must show an honest "opens soon" state when the integration is not configured; never fake success.
 - Shared form validation lives in `src/lib/forms.ts` and is re-run on the server.

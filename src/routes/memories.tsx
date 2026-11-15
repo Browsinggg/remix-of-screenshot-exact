@@ -75,7 +75,10 @@ function MemoriesPage() {
           <div className="invite-card rounded-2xl px-6 py-12 text-center">
             <Feather className="mx-auto size-8 text-gold-deep" aria-hidden="true" />
             <h2 className="mt-4 text-3xl text-primary-deep">Thank you, {guestName}</h2>
-            <p className="mt-3 text-muted-foreground">Your memory has been tucked away safely for Saniya & Raghav.</p>
+            <p className="mt-1 font-script text-3xl text-gold-deep">with love, received</p>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              Your memory has been tucked away safely for Saniya & Raghav. They'll read every word — thank you for being part of their story.
+            </p>
             <Monogram size="md" className="mt-6 block" />
             <Button variant="link" className="mt-4" onClick={() => { setResult(null); setMessage(""); renewId(); }}>
               Share another memory
@@ -86,7 +89,7 @@ function MemoriesPage() {
             <Field id="mem-name" label="Your name" error={errors.guestName}>
               <Input id="mem-name" autoComplete="name" value={guestName} onChange={(e) => setGuestName(e.target.value)} aria-invalid={!!errors.guestName} />
             </Field>
-            <Field id="mem-msg" label="Your favourite memory or message" error={errors.message}>
+            <Field id="mem-msg" label="Your favourite memory" error={errors.message}>
               <Textarea id="mem-msg" rows={7} value={message} onChange={(e) => setMessage(e.target.value)}
                 className="font-display text-lg leading-relaxed" placeholder="Dear Saniya & Raghav…" aria-invalid={!!errors.message} />
             </Field>

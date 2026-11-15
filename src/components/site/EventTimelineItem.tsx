@@ -5,50 +5,46 @@ import type { WeddingEvent } from "@/config/wedding";
 import { cn } from "@/lib/utils";
 import { googleCalendarUrl, mapsSearchUrl } from "@/lib/wedding-utils";
 
-const toneStyles: Record<WeddingEvent["tone"], { band: string; chip: string }> = {
-  rose: { band: "bg-primary", chip: "text-primary" },
-  gold: { band: "bg-gold", chip: "text-gold-deep" },
-  maroon: { band: "bg-primary-deep", chip: "text-primary-deep" },
+const toneStyles: Record<WeddingEvent["tone"], { dot: string; text: string }> = {
+  rose: { dot: "bg-primary", text: "text-primary" },
+  gold: { dot: "bg-gold", text: "text-gold-deep" },
+  maroon: { dot: "bg-primary-deep", text: "text-primary-deep" },
 };
 
-export function EventCard({ event, index }: { event: WeddingEvent; index: number }) {
+/** One function on the vertical Celebrations timeline: date medallion on the rail, details beside it. */
+export function EventTimelineItem({ event, index, last }: { event: WeddingEvent; index: number; last?: boolean }) {
   const tone = toneStyles[event.tone];
+  const [dayNum, month] = event.dateLabel.split(" ");
   return (
-    <article className="invite-card overflow-hidden rounded-xl" aria-labelledby={`${event.id}-title`}>
-      <div className={cn("h-1.5 w-full", tone.band)} aria-hidden="true" />
-      <div className="p-6 sm:p-8">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className={cn("eyebrow", tone.chip)}>Function {String(index + 1).padStart(2, "0")}</p>
-            <h3 id={`${event.id}-title`} className="mt-2 text-3xl text-foreground sm:text-4xl">
-              {event.name}
-            </h3>
-            <p className="font-script text-2xl text-gold-deep">{event.tagline}</p>
-          </div>
-          <div className="shrink-0 rounded-md border border-gold/60 px-3 py-2 text-center">
-            <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">
-              {event.dayLabel.slice(0, 3)}
-            </span>
-            <span className="block font-display text-3xl leading-none text-primary-deep">
-              {event.dateLabel.split(" ")[0]}
-            </span>
-            <span className="block text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">Dec</span>
-          </div>
+    <li className={cn("reveal relative grid grid-cols-[3.75rem_minmax(0,1fr)] gap-3 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-8", !last && "pb-14")}>
+      {/* rail */}
+      {!last && <span className="absolute bottom-0 left-[1.875rem] top-20 w-px bg-gradient-to-b from-gold to-gold/20 sm:left-14" aria-hidden="true" />}
+      <div className="flex flex-col items-center text-center">
+        <div className="flex size-[3.75rem] flex-col items-center justify-center rounded-full border border-gold bg-paper shadow-[var(--shadow-card)] sm:size-24">
+          <span className="text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">{event.dayLabel.slice(0, 3)}</span>
+          <span className="font-display text-2xl leading-none text-primary-deep sm:text-4xl">{dayNum}</span>
+          <span className="text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">{month?.slice(0, 3)}</span>
         </div>
+        <span className={cn("mt-3 size-2 rotate-45", tone.dot)} aria-hidden="true" />
+      </div>
 
+      <article className="invite-card min-w-0 rounded-xl p-5 sm:p-8" aria-labelledby={`${event.id}-title`}>
+        <p className={cn("eyebrow", tone.text)}>Function {String(index + 1).padStart(2, "0")} · {event.dayLabel}, {event.dateLabel}</p>
+        <h2 id={`${event.id}-title`} className="mt-2 text-3xl text-foreground sm:text-4xl">{event.name}</h2>
+        <p className="font-script text-2xl text-gold-deep">{event.tagline}</p>
         <p className="mt-4 leading-relaxed text-muted-foreground">{event.description}</p>
 
-        <dl className="mt-6 space-y-3 text-sm">
+        <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
           <div className="flex gap-3">
             <Clock className="mt-0.5 size-4 shrink-0 text-gold-deep" aria-hidden="true" />
             <div>
               <dt className="sr-only">Time</dt>
               <dd>
-                <span className="font-medium">{event.dayLabel}, {event.dateLabel}</span>
-                <ul className="mt-1 space-y-0.5 text-muted-foreground">
+                <ul className="space-y-0.5">
                   {event.timings.map((t) => (
                     <li key={t.label}>
-                      {t.label} — <span className="text-foreground">{t.time}</span>
+                      <span className="text-muted-foreground">{t.label} — </span>
+                      <span className="font-medium">{t.time}</span>
                     </li>
                   ))}
                 </ul>
@@ -70,17 +66,17 @@ export function EventCard({ event, index }: { event: WeddingEvent; index: number
 
         <div className="mt-7 grid gap-3 sm:grid-cols-2">
           <Button asChild variant="gold" size="lg">
-            <a href={mapsSearchUrl(`${event.venueName}, ${event.venueArea}`)} target="_blank" rel="noreferrer">
-              <MapPin /> Open in Maps
+            <a href={mapsSearchUrl(`${event.venueName}, ${event.venueArea}`)} target="_blank" rel="noopener noreferrer">
+              <MapPin /> Open in Google Maps
             </a>
           </Button>
           <Button asChild variant="rose" size="lg">
-            <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
-              <CalendarPlus /> Add to Calendar
+            <a href={googleCalendarUrl(event)} target="_blank" rel="noopener noreferrer">
+              <CalendarPlus /> Add to Google Calendar
             </a>
           </Button>
         </div>
-      </div>
-    </article>
+      </article>
+    </li>
   );
 }

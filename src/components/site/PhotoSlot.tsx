@@ -15,7 +15,7 @@ export function PhotoSlot({
   variant = "polaroid",
 }: {
   slot: Slot;
-  className?: string;
+  className?: string | undefined;
   tilt?: number | undefined;
   fill?: boolean;
   variant?: "polaroid" | "frame";

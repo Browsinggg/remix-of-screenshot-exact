@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { contacts, events, wedding } from "@/config/wedding";
-import { checkSchema, rsvpSchema, totalAttendees } from "@/lib/forms";
-import { googleCalendarUrl, telLink, whatsappLink } from "@/lib/wedding-utils";
+import { rsvpSchema, totalAttendees } from "@/lib/forms";
+import { googleCalendarUrl, parseVideoUrl, telLink, whatsappLink } from "@/lib/wedding-utils";
 
 const baseRsvp = {
   submissionId: "3b241101-e2bb-4255-8caf-4136c566a962",
@@ -13,8 +13,6 @@ const baseRsvp = {
   children: 1,
   attending: "yes" as const,
   functions: ["wedding"],
-  diet: "Jain" as const,
-  dietNotes: "",
   confirm: true as const,
 };
 
@@ -33,7 +31,7 @@ describe("wedding rules", () => {
   });
 
   it("phone and WhatsApp links use +91", () => {
-    expect(telLink(contacts[0]!.phone)).toBe("tel:+919820046549");
+    expect(telLink("9820046549")).toBe("tel:+919820046549");
     expect(whatsappLink("9811407991")).toBe("https://wa.me/919811407991");
   });
 
@@ -42,7 +40,23 @@ describe("wedding rules", () => {
     expect(rsvpSchema.safeParse(baseRsvp).success).toBe(true);
   });
 
-  it("check-in requires a hotel as well as a room number", () => {
-    expect(checkSchema.safeParse({ hotelId: "", hotelName: "", room: "204", action: "check-in" }).success).toBe(false);
+  it("contacts appear in the order Shourya, Vikas, Poneet with unchanged numbers", () => {
+    expect(contacts).toEqual([
+      { name: "Shourya Goel", phone: "9557310364" },
+      { name: "Vikas Gupta (Vicky)", phone: "9811407991" },
+      { name: "Poneet Gupta", phone: "9820046549" },
+    ]);
+  });
+
+  it("RSVP no longer collects dietary preferences", () => {
+    const parsed = rsvpSchema.parse({ ...baseRsvp, diet: "Jain", dietNotes: "no onion" });
+    expect(parsed).not.toHaveProperty("diet");
+    expect(parsed).not.toHaveProperty("dietNotes");
+  });
+
+  it("invitation video links: YouTube becomes an embed, files play directly, empty shows placeholder", () => {
+    expect(parseVideoUrl("https://youtu.be/abcDEF12345")).toMatchObject({ kind: "youtube", id: "abcDEF12345" });
+    expect(parseVideoUrl("https://example.com/invite.mp4")).toEqual({ kind: "file", src: "https://example.com/invite.mp4" });
+    expect(parseVideoUrl("")).toEqual({ kind: "none" });
   });
 });
