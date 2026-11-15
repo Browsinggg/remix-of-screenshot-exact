@@ -14,6 +14,13 @@
 - [x] Contacts reordered (Shourya, Vikas, Poneet), compact call/WhatsApp layout
 - [x] Footer closing message from Saniya & Raghav
 
+## Phase 1.6 — Date-aware guest experience
+- [ ] Rebuild Home as one continuous page: hero, Camera, Celebrations, RSVP, short Our Story, footer
+- [ ] Desktop top navigation and four-icon mobile bottom navigation; remove Memories and Contact from navigation
+- [ ] Asia/Kolkata pre-wedding, event-day, and post-wedding modes, including Next up and help actions
+- [ ] Footer contact actions on every page; hide guest-facing placeholders
+- [ ] Meet requested text, contrast, and tap-target accessibility minimums without changing the visual identity
+
 ## Phase 2 — Google Sheets connection (waiting on family)
 - [ ] Family creates spreadsheet + deploys Apps Script (docs/google-sheets-setup.md)
 - [ ] Add APPS_SCRIPT_URL and APPS_SCRIPT_SECRET secrets, then test RSVP + guestbook end-to-end
