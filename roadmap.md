@@ -15,6 +15,7 @@
 - [x] Footer closing message from Saniya & Raghav
 
 ## Phase 1.6 — Date-aware guest experience
+- [ ] Add the requested shehnai entrance screen and updated hero; keep the existing look.
 - [ ] Rebuild Home as one continuous page: hero, Camera, Celebrations, RSVP, short Our Story, footer
 - [ ] Desktop top navigation and four-icon mobile bottom navigation; remove Memories and Contact from navigation
 - [ ] Asia/Kolkata pre-wedding, event-day, and post-wedding modes, including Next up and help actions
